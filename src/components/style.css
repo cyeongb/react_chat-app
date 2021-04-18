@@ -1,0 +1,28 @@
+/*ChatFeed.jsx*/
+
+.message-frame{
+    width: "100%"
+}
+.message-container{
+    height: "100px"
+}
+
+/* MyMessage.jsx */
+.message-image{
+    float: right;
+}
+
+.message{
+    float: right;
+    margin-right: 18px;
+    color:antiquewhite;
+    background-color:purple;
+}
+
+/*TheirMessage.jsx*/
+.their-message{
+    float: left;
+    background-color:aquamarine;
+}
+
+/* MessageForm.jsx*/

@@ -2,6 +2,7 @@ import MessageForm from "./MessageForm";
 import MyMessage from "./MyMessage";
 import TheirMessage from "./TheirMessage";
 import { memo } from "react";
+import "./style.css";
 const ChatFeed = memo((props) => {
   const { chats, activeChat, userName, messages } = props;
 
@@ -19,6 +20,7 @@ const ChatFeed = memo((props) => {
 
     return keys.map((key, i) => {
       const message = messages[key];
+      console.log("message >", message);
       const lastMessageKey = i === 0 ? null : keys[i - 1];
       console.log("lastMessageKey >", lastMessageKey);
 
@@ -26,7 +28,7 @@ const ChatFeed = memo((props) => {
       console.log("isMyMessage >", isMyMessage);
 
       return (
-        <div key={`msg_${i}`} style={{ width: "100%" }}>
+        <div key={`msg_${i}`} className="message-frame">
           <div className="message-block">
             {isMyMessage ? (
               <MyMessage message={message} />
@@ -64,7 +66,7 @@ const ChatFeed = memo((props) => {
         </div>
       </div>
       {renderMessages()}
-      <div style={{ height: "100px" }} />
+      <div className="message-container" />
       <div className="message-form-container">
         <MessageForm {...props} chatId={activeChat} />
       </div>

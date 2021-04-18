@@ -1,5 +1,5 @@
 import { memo } from "react";
-
+import "./style.css";
 const MessageForm = memo(() => {
   console.log("MessageForm render()");
 
