@@ -1,9 +1,40 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import "./style.css";
-const MessageForm = memo(() => {
+import { sendMessage, isTyping } from "react-chat-engine";
+
+const MessageForm = memo((props) => {
+  //메세지를 쓰고 보낼수 있는 컴포넌튼
   console.log("MessageForm render()");
 
-  return <div>MessageForm</div>;
+  const [value, setValue] = useState("");
+  const [chatId, creds] = props;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const text = value.trim();
+    console.log("text>", text);
+    console.log("{text}>", { text });
+    if (text.length > 0) {
+      sendMessage(creds, chatId, { text });
+    }
+  };
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    isTyping(props, chatId);
+  };
+
+  return (
+    <form className="message-form" onSubmit={handleSubmit}>
+      <input
+        className="message-input"
+        placeholder="input message.."
+        value={value}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    </form>
+  );
 });
 
 export default MessageForm;
