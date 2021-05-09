@@ -1,13 +1,29 @@
 import MessageForm from "./MessageForm";
 import MyMessage from "./MyMessage";
 import TheirMessage from "./TheirMessage";
-import { memo } from "react";
+
 import "./style.css";
-const ChatFeed = memo((props) => {
+const ChatFeed = (props) => {
   const { chats, activeChat, userName, messages } = props;
 
   const chat = chats && chats[activeChat];
   // chats가 존재하면, 활성화된 chat을 찾습니다
+
+  console.log("chat > ", chat);
+  const renderReadReceipts = (message, isMyMessage) => {
+    chat.people.map((person, i) => {
+      person.last_read === message.id && (
+        <div
+          key={`read_${i}`}
+          className="read-receipt"
+          style={{
+            float: isMyMessage ? "right" : "left",
+            backgroundImage: `url(${message?.sender?.avatar})`,
+          }}
+        />
+      );
+    });
+  };
 
   console.log("ChatFeed render()");
   console.log("chats>", chats);
@@ -72,6 +88,6 @@ const ChatFeed = memo((props) => {
       </div>
     </div>
   );
-});
+};
 
 export default ChatFeed;

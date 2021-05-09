@@ -1,13 +1,14 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import "./style.css";
 import { sendMessage, isTyping } from "react-chat-engine";
+import { SendOutlined, PictureOutlined } from "@ant-design/icons";
 
-const MessageForm = memo((props) => {
+const MessageForm = (props) => {
   //메세지를 쓰고 보낼수 있는 컴포넌튼
   console.log("MessageForm render()");
 
   const [value, setValue] = useState("");
-  const [chatId, creds] = props;
+  const { chatId, creds } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +28,11 @@ const MessageForm = memo((props) => {
     isTyping(props, chatId);
   };
 
+  const handleUpload = (e) => {
+    //img같은거 올릴때 쓰는 api
+    sendMessage(creds, chatId, { files: e.target.files, text: "" });
+  };
+
   return (
     <form className="message-form" onSubmit={handleSubmit}>
       <input
@@ -36,8 +42,22 @@ const MessageForm = memo((props) => {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
+      <label htmlFor="upload-button">
+        <span className="image-button">
+          <PictureOutlined className="picture-icon" />
+        </span>
+      </label>
+      <input
+        className="message-input"
+        type="file"
+        multiple={false}
+        onChange={handleUpload}
+      />
+      <button className="send-btn" type="submit">
+        <SendOutlined className="send-icon" />
+      </button>
     </form>
   );
-});
+};
 
 export default MessageForm;

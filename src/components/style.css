@@ -26,3 +26,7 @@
 }
 
 /* MessageForm.jsx*/
+
+.message-input{
+    display:none;
+}

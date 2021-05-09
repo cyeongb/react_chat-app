@@ -12,6 +12,8 @@ const TheirMessage = ({ message, lastMessage }) => {
         <div
           className="message-avatar"
           style={{ backgroundImage: `url(${message?.sender?.avatar})` }}
+          // 이중 삼항연산자
+          //a?b?c --> a있어? 그럼 b , b있어? 그럼 c
         />
       )}
       {message?.attachments?.length > 0}
