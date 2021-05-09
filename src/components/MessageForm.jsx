@@ -16,7 +16,10 @@ const MessageForm = memo((props) => {
     console.log("{text}>", { text });
     if (text.length > 0) {
       sendMessage(creds, chatId, { text });
+      // sendMessage()라는 컴포넌트에 양식에 맞게  props들을 전달합니다.
     }
+
+    setValue("");
   };
 
   const handleChange = (e) => {
